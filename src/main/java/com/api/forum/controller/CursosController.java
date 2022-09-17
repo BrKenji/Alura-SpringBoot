@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.api.forum.controller.form.CursoForm;
 import com.api.forum.dto.CursoDto;
+import com.api.forum.form.CursoForm;
 import com.api.forum.model.Curso;
 import com.api.forum.repository.CursoRepository;
 

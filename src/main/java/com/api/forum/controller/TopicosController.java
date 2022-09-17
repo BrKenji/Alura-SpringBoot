@@ -3,6 +3,7 @@ package com.api.forum.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.api.forum.controller.form.TopicoForm;
 import com.api.forum.dto.DetailedTopicoDto;
 import com.api.forum.dto.TopicoDto;
+import com.api.forum.form.TopicoForm;
+import com.api.forum.form.UpdateTopicoForm;
 import com.api.forum.model.Topico;
 import com.api.forum.repository.CursoRepository;
 import com.api.forum.repository.TopicoRepository;
@@ -58,6 +61,17 @@ public class TopicosController {
 		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));
+		
+	}
+	
+	@PutMapping("/{id}")
+	@Transactional // @Transactional tells Spring to commit the transaction
+	public ResponseEntity<TopicoDto> updateTopicos(@PathVariable Long id,
+			@RequestBody @Valid UpdateTopicoForm updateForm){
+		
+		Topico topico = updateForm.update(id, topicoRepository);
+		
+		return ResponseEntity.ok(new TopicoDto(topico));
 		
 	}
 	

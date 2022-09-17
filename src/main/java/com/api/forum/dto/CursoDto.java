@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.api.forum.model.Curso;
-import com.api.forum.model.Topico;
 
 public class CursoDto {
 

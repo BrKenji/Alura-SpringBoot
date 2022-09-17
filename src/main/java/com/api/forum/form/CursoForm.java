@@ -1,4 +1,4 @@
-package com.api.forum.controller.form;
+package com.api.forum.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

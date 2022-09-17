@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.api.forum.controller.form.TopicoForm;
+import com.api.forum.dto.DetailedTopicoDto;
 import com.api.forum.dto.TopicoDto;
 import com.api.forum.model.Topico;
 import com.api.forum.repository.CursoRepository;
@@ -68,6 +70,14 @@ public class TopicosController {
 			return topicoRepository.getByCourseName(nomeCurso).size();	
 		}
 		
+	}
+	
+	@GetMapping("/{id}")
+	public DetailedTopicoDto detail(@PathVariable Long id) {
+		
+		Topico topico = topicoRepository.getReferenceById(id);
+		
+		return new DetailedTopicoDto(topico);
 	}
 	
 	

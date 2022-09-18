@@ -2,6 +2,7 @@ package com.api.forum.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -71,9 +72,14 @@ public class TopicosController {
 	public ResponseEntity<TopicoDto> updateTopicos(@PathVariable Long id,
 			@RequestBody @Valid UpdateTopicoForm updateForm){
 		
-		Topico topico = updateForm.update(id, topicoRepository);
+		Optional<Topico> optional = topicoRepository.findById(id);
 		
-		return ResponseEntity.ok(new TopicoDto(topico));
+		if(optional.isPresent()) {
+			Topico topico = updateForm.update(id, topicoRepository);
+			return ResponseEntity.ok(new TopicoDto(topico));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 		
 	}
 	
@@ -81,9 +87,15 @@ public class TopicosController {
 	@Transactional
 	public ResponseEntity<?> deleteTopico(@PathVariable Long id){
 		
-		topicoRepository.deleteById(id);
+		Optional<Topico> optional = topicoRepository.findById(id);
 		
-		return ResponseEntity.ok().build();
+		if(optional.isPresent()) {
+			topicoRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	
 	}
 	
 	@GetMapping("/count")
@@ -98,11 +110,15 @@ public class TopicosController {
 	}
 	
 	@GetMapping("/{id}")
-	public DetailedTopicoDto detail(@PathVariable Long id) {
+	public ResponseEntity<DetailedTopicoDto> detail(@PathVariable Long id) {
 		
-		Topico topico = topicoRepository.getReferenceById(id);
+		Optional<Topico> topico = topicoRepository.findById(id);
 		
-		return new DetailedTopicoDto(topico);
+		if(topico.isPresent()) {
+			return ResponseEntity.ok(new DetailedTopicoDto(topico.get()));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	

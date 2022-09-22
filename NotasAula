@@ -69,9 +69,9 @@ Nesta aula, aprendemos que:
 
 Spring Boot API Rest: Segurança da API, Cache e Monitoramento
 
-AULA 01:
+AULA 01: Paginação e Ordenação de recursos
 
-Nesta aula, aprendemos que:
+Nesta aula, aprendemos que: 
 
 - Para realizar paginação com Spring Data JPA, devemos utilizar a interface Pageable;
 - Nas classes Repository, os métodos que recebem um pageable como parâmetro retornam objetos do tipo Page<>, ao invés de List<>;
@@ -79,3 +79,12 @@ Nesta aula, aprendemos que:
 - Para fazer a ordenação na consulta ao banco de dados, devemos utilizar também a interface Pageable, passando como parâmetro a direção da ordenação, utilizando a classe Direction, e o nome do atributo para ordenar;
 - Para receber os parâmetros de ordenação e paginação diretamente nos métodos do controller, devemos habilitar o módulo SpringDataWebSupport, adicionando a anotação @EnableSpringDataWebSupport na classe ForumApplication.
 
+AULA 02: Melhorando desempenho com Spring Cache
+
+Nesta aula, aprendemos que:
+
+- Para utilizar o módulo de cache do Spring Boot, devemos adicioná-lo como dependência do projeto no arquivo pom.xml;
+- Para habilitar o uso de caches na aplicação, devemos adicionar a anotação @EnableCaching na classe ForumApplication;
+- Para que o Spring guarde o retorno de um método no cache, devemos anotá-lo com @Cacheable;
+- Para o Spring invalidar algum cache após um determinado método ser chamado, devemos anotá-lo com @CacheEvict;
+- Devemos utilizar cache apenas para as informações que nunca ou raramente são atualizadas no banco de dados.

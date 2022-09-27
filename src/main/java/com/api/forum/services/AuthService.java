@@ -1,4 +1,4 @@
-package com.api.forum.config.security;
+package com.api.forum.services;
 
 import java.util.Optional;
 

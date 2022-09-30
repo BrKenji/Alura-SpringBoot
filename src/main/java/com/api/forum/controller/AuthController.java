@@ -21,6 +21,7 @@ import com.api.forum.services.TokenService;
 @RequestMapping("/auth")
 public class AuthController {
 	
+	// The AuthManager is used to trigger the authentification via username and password
 	@Autowired
 	private AuthenticationManager authManager;
 	

@@ -59,7 +59,7 @@ public class TopicosController {
 		if(nomeCurso == null) {
 			Page<Topico> topicos = topicoRepository.findAll(paginacao);
 			return TopicoDto.topicModelToDto(topicos);
-		} else {
+		} else { 
 			Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
 			return TopicoDto.topicModelToDto(topicos);	
 		}

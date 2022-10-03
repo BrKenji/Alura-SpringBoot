@@ -56,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.GET, "/cursos/*").permitAll()
 		.antMatchers(HttpMethod.DELETE, "/cursos/*").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.GET, "/actuator").permitAll() // access to this endpoint is only being allow for practice purposes, this endpoint shows sensitive info about the API, therefore in real life applications it should have limited access
+		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) 
